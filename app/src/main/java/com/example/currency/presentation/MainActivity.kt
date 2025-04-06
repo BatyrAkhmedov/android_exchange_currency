@@ -1,4 +1,4 @@
-package com.example.currency.ui
+package com.example.currency.presentation
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -17,11 +17,5 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
-
-
-
-
     }
 }

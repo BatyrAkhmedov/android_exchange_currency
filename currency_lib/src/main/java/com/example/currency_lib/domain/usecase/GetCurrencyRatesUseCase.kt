@@ -1,20 +1,22 @@
 package com.example.currency_lib.domain.usecase
 
-import com.example.currency_lib.data.model.ExchangeResponse
-import com.example.currency_lib.data.remote.CurrencyRepository
-import retrofit2.Call
+import com.example.currency_lib.domain.model.Currency
+import com.example.currency_lib.domain.model.CurrencyChanges
+import com.example.currency_lib.domain.repository.ExchangeRepository
+import com.example.currency_lib.domain.util.CurrencyDate
 
-class GetCurrencyRatesUseCase(private val currencyRepository: CurrencyRepository) {
+class GetCurrencyRatesUseCase(
+    private var currencyRepository: ExchangeRepository,
+    private val dateUtil: CurrencyDate,
+) {
+    suspend fun getCurrencyRates(date: String): List<Currency> {
+        return currencyRepository.getLatestRates(date)
+    }
 
-    fun execute(accessKey: String, symbols: String, callback: (ExchangeResponse?) -> Unit) {
-        currencyRepository.getLatestRates(accessKey, symbols).enqueue(object : retrofit2.Callback<ExchangeResponse> {
-            override fun onResponse(call: Call<ExchangeResponse>, response: retrofit2.Response<ExchangeResponse>) {
-                callback(response.body())
-            }
-
-            override fun onFailure(call: Call<ExchangeResponse>, t: Throwable) {
-                callback(null)
-            }
-        })
+    suspend fun getCurrencyChanges(): List<CurrencyChanges> {
+        return currencyRepository.getLatestRatesWithChanges(
+            dateUtil.getYesterday(),
+            dateUtil.getToday()
+        )
     }
 }

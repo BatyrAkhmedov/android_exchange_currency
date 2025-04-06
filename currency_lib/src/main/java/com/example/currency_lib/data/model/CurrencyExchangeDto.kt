@@ -1,6 +1,6 @@
 package com.example.currency_lib.data.model
 
-data class ExchangeResponse(
+data class CurrencyExchangeDto(
     val success: Boolean,
     val timestamp: Long,
     val base: String,
