@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 
 private const val BASE_URL = "https://api.exchangeratesapi.io/v1/"
-private const val ACCESS_KEY = "09692c0129301bf0639076c92a9f7b2c"
+private const val ACCESS_KEY = "54942bca91b39139943d0679b759723c"
 private const val BASE_CURRENCY = "EUR"
 private val okHttpClient = OkHttpClient.Builder().addInterceptor(
     HttpLoggingInterceptor().apply {
